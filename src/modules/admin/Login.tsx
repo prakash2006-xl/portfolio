@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { supabase } from '../../services/supabase/client'
 import { GlassCard } from '../../shared/ui/GlassCard'
 import { useAuthStore } from '../../store/auth.store'
 
@@ -12,16 +13,19 @@ export const Login = () => {
     e.preventDefault()
     setLoading(true)
     
-    // Simulated mock login
-    setTimeout(() => {
-      if (email === 'admin@admin.com' && password === 'admin') {
-        setUser({ email })
-        setIsAdmin(true)
-      } else {
-        alert('Invalid credentials. Use admin@admin.com / admin')
-      }
-      setLoading(false)
-    }, 500)
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password
+    })
+
+    if (error) {
+      alert(error.message)
+    } else if (data.user) {
+      setUser(data.user)
+      setIsAdmin(true)
+    }
+    
+    setLoading(false)
   }
 
   return (
