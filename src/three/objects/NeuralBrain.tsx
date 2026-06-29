@@ -59,13 +59,13 @@ export const NeuralBrain = ({ position }: { position?: [number, number, number] 
     <group ref={groupRef} position={position}>
       <points>
         <bufferGeometry>
-          <bufferAttribute attach="attributes-position" count={points.length / 3} array={points} itemSize={3} />
+          <bufferAttribute attach="attributes-position" args={[points, 3]} />
         </bufferGeometry>
         <pointsMaterial size={0.06} color="#E879F9" transparent opacity={0.9} sizeAttenuation />
       </points>
       <lineSegments>
         <bufferGeometry>
-          <bufferAttribute attach="attributes-position" count={lines.length / 3} array={lines} itemSize={3} />
+          <bufferAttribute attach="attributes-position" args={[lines, 3]} />
         </bufferGeometry>
         <lineBasicMaterial color="#C084FC" transparent opacity={0.25} />
       </lineSegments>

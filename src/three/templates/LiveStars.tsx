@@ -6,7 +6,7 @@ import * as THREE from 'three'
 export const LiveStars = () => {
   const groupRef = useRef<THREE.Group>(null)
   
-  useFrame((state, delta) => {
+  useFrame((_state, delta) => {
     if (groupRef.current) {
       // Slow rotation for the entire galaxy
       groupRef.current.rotation.y -= delta * 0.04

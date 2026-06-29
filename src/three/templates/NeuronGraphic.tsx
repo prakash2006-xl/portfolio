@@ -43,7 +43,7 @@ export const NeuronGraphic = () => {
     }
   }, [])
 
-  useFrame((state, delta) => {
+  useFrame((_state, delta) => {
     if (groupRef.current) {
       groupRef.current.rotation.y += delta * 0.04
       groupRef.current.rotation.x += delta * 0.02
@@ -56,9 +56,7 @@ export const NeuronGraphic = () => {
         <bufferGeometry>
           <bufferAttribute
             attach="attributes-position"
-            count={points.length / 3}
-            array={points}
-            itemSize={3}
+            args={[points, 3]}
           />
         </bufferGeometry>
         <pointsMaterial size={0.12} color="#00e5ff" transparent opacity={0.9} sizeAttenuation />
@@ -67,9 +65,7 @@ export const NeuronGraphic = () => {
         <bufferGeometry>
           <bufferAttribute
             attach="attributes-position"
-            count={lines.length / 3}
-            array={lines}
-            itemSize={3}
+            args={[lines, 3]}
           />
         </bufferGeometry>
         <lineBasicMaterial color="#2dd4bf" transparent opacity={0.15} />

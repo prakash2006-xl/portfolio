@@ -6,18 +6,24 @@ export const AnimationsTab = () => {
   const themes = [
     { id: 'particles', name: '3D Dust Particles', desc: 'Classic floating particles in 3D space.' },
     { id: 'aurora', name: 'Aurora Borealis', desc: 'Flowing animated CSS gradient waves.' },
-    { id: 'cybergrid', name: 'Cyberpunk Grid', desc: 'Retro-futuristic moving neon grid.' },
-    { id: 'matrix', name: 'Matrix Digital Rain', desc: 'Falling green code.' },
     { id: 'holographic', name: 'Holographic', desc: 'Iridescent glossy animated gradient.' },
-    { id: 'neon-pulse', name: 'Neon Pulse', desc: 'Dark background with pulsating neon glow.' },
     { id: 'starlight', name: 'Starlight', desc: 'Twinkling animated star field.' },
     { id: 'lava-lamp', name: 'Lava Lamp', desc: 'Slow moving soft liquid blobs.' },
-    { id: 'synthwave', name: 'Synthwave', desc: '80s retro outrun style grid and sunset.' },
     { id: 'quantum', name: 'Quantum', desc: 'High-tech flowing energy lines.' },
     { id: 'zen-garden', name: 'Zen Garden', desc: 'Calm and slow moving pastel flow.' },
     { id: 'cosmic-dust', name: 'Cosmic Dust', desc: 'Deep space rotating galaxy vibe.' },
-    { id: 'hacker-terminal', name: 'Hacker Terminal', desc: 'Dark green minimal retro console.' },
-    { id: 'liquid-metal', name: 'Liquid Metal', desc: 'Smooth silver and chrome flowing metal.' }
+    { id: 'liquid-metal', name: 'Liquid Metal', desc: 'Smooth silver and chrome flowing metal.' },
+    { id: 'nebula', name: 'Nebula Mist', desc: 'Slow rotating cosmic color clouds.' },
+    { id: 'soft-clouds', name: 'Soft Clouds', desc: 'Gentle, light blue pastel gradient.' },
+    { id: 'midnight-blue', name: 'Midnight Blue', desc: 'Deep, rich blue with a subtle shift.' },
+    { id: 'frost', name: 'Frost', desc: 'Crisp, icy white and light blue.' },
+    { id: 'warm-sand', name: 'Warm Sand', desc: 'Earthy, comforting beige and sand tones.' },
+    { id: 'emerald-depths', name: 'Emerald Depths', desc: 'Dark, rich green water-like gradient.' },
+    { id: 'silk', name: 'Silk', desc: 'Smooth flowing dark maroon and purple.' },
+    { id: 'monochrome-shift', name: 'Monochrome Shift', desc: 'Sophisticated dark grays panning slowly.' },
+    { id: 'golden-hour', name: 'Golden Hour', desc: 'Warm sunset oranges and yellows.' },
+    { id: 'abyss', name: 'Abyss', desc: 'Pure black with faint, deep purple accents.' },
+    { id: 'ocean-breeze', name: 'Ocean Breeze', desc: 'Light cyan to soft purple pastel blend.' }
   ]
 
   return (
@@ -43,7 +49,6 @@ export const AnimationsTab = () => {
         {[
           { id: 'particles', name: 'GPU Particles', desc: 'Custom optimized thousands of floating particles.' },
           { id: 'stars', name: 'Deep Space Stars', desc: 'A static field of 3D stars using Drei.' },
-          { id: 'sparkles', name: 'Magical Sparkles', desc: 'Floating and glowing fairy dust.' },
           { id: 'cloud', name: 'Volumetric Cloud', desc: 'A large, slowly moving 3D cloud structure.' },
           { id: 'neuron', name: 'Neural Network', desc: 'Tech-focused interconnected AI node graphics.' },
           { id: 'deep-sea', name: 'Deep Sea', desc: 'Calm underwater floating bubble mechanics.' },
