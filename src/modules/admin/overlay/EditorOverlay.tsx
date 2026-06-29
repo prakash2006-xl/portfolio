@@ -10,6 +10,8 @@ import { EducationTab } from './tabs/EducationTab'
 import { AnimationsTab } from './tabs/AnimationsTab'
 import { LayoutTab } from './tabs/LayoutTab'
 import { CertificationsTab } from './tabs/CertificationsTab'
+import { LiveProjectsTab } from './tabs/LiveProjectsTab'
+import { TypographyTab } from './tabs/TypographyTab'
 
 interface EditorOverlayProps {
   onClose: () => void
@@ -131,7 +133,7 @@ export const EditorOverlay = ({ onClose }: EditorOverlayProps) => {
             >
               {/* Sidebar Tabs */}
               <div className="w-full md:w-64 border-b md:border-b-0 md:border-r border-white/5 bg-black/20 p-4 md:p-6 flex flex-row md:flex-col gap-2 overflow-x-auto md:overflow-y-auto hide-scrollbar shrink-0">
-                {['profile', 'layout', 'experience', 'projects', 'skills', 'education', 'certifications', 'animations'].map(tab => (
+                {['profile', 'layout', 'typography', 'experience', 'projects', 'liveProjects', 'skills', 'education', 'certifications', 'animations'].map(tab => (
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
@@ -158,8 +160,10 @@ export const EditorOverlay = ({ onClose }: EditorOverlayProps) => {
                   >
                     {activeTab === 'profile' && <ProfileTab />}
                     {activeTab === 'layout' && <LayoutTab />}
+                    {activeTab === 'typography' && <TypographyTab />}
                     {activeTab === 'experience' && <ExperienceTab />}
                     {activeTab === 'projects' && <ProjectsTab />}
+                    {activeTab === 'liveProjects' && <LiveProjectsTab />}
                     {activeTab === 'skills' && <SkillsTab />}
                     {activeTab === 'education' && <EducationTab />}
                     {activeTab === 'certifications' && <CertificationsTab />}

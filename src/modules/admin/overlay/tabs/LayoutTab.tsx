@@ -1,12 +1,27 @@
 import { motion } from 'framer-motion'
 import { useCMSStore } from '../../../../store/cms.store'
 import { ArrowUp, ArrowDown } from 'lucide-react'
+import { useMemo } from 'react'
+
+const DEFAULT_SECTION_ORDER = ['about', 'skills', 'projects', 'liveProjects', 'certifications', 'experience']
 
 export const LayoutTab = () => {
-  const { sectionOrder, setSectionOrder } = useCMSStore()
+  const { sectionOrder: rawSectionOrder, setSectionOrder } = useCMSStore()
 
-  // Fallback in case sectionOrder is somehow empty
-  const currentOrder = sectionOrder?.length > 0 ? sectionOrder : ['about', 'skills', 'projects', 'experience']
+  const currentOrder = useMemo(() => {
+    const base = rawSectionOrder?.length ? rawSectionOrder : DEFAULT_SECTION_ORDER
+    const missing = DEFAULT_SECTION_ORDER.filter(s => !base.includes(s))
+    return missing.length > 0 ? [...base, ...missing] : base
+  }, [rawSectionOrder])
+
+  const displayNames: Record<string, string> = {
+    about: 'About Me',
+    skills: 'Skills',
+    projects: 'Projects',
+    liveProjects: 'Live Projects',
+    certifications: 'Certifications',
+    experience: 'Experience'
+  }
 
   const moveUp = (index: number) => {
     if (index === 0) return
@@ -44,7 +59,7 @@ export const LayoutTab = () => {
             animate={{ opacity: 1, y: 0 }}
             className="flex items-center justify-between bg-black/40 border border-white/10 rounded-xl p-4 shadow-sm"
           >
-            <span className="text-white font-medium capitalize text-lg">{section}</span>
+            <span className="text-white font-medium text-lg">{displayNames[section] || section}</span>
             <div className="flex items-center gap-2">
               <button 
                 onClick={() => moveUp(index)}

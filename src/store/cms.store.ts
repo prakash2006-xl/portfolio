@@ -95,6 +95,7 @@ export const useCMSStore = create<CMSState>()(
           tags: ['Web Portal', 'Dashboard']
         }
       ],
+      liveProjects: [],
       experience: [
         {
           id: 'e1',
@@ -143,7 +144,8 @@ export const useCMSStore = create<CMSState>()(
         { id: 'c5', name: 'Mastering the Art of Prompting', issuer: 'Adobe Learning Manager', date: 'Apr 2026' },
         { id: 'c6', name: 'Video Editing Webinar', issuer: 'Brand Monk Academy / NSDC', date: 'Mar 2026' },
       ],
-      sectionOrder: ['about', 'skills', 'projects', 'experience'],
+      sectionOrder: ['about', 'skills', 'projects', 'liveProjects', 'certifications', 'experience'],
+      sectionFonts: {},
       updateProfile: (data) => set((state) => ({ profile: { ...state.profile, ...data } })),
 
       addSkill: (skill) => set((state) => ({ skills: [...state.skills, skill] })),
@@ -157,6 +159,12 @@ export const useCMSStore = create<CMSState>()(
         projects: state.projects.map(p => p.id === id ? { ...p, ...data } : p)
       })),
       removeProject: (id) => set((state) => ({ projects: state.projects.filter(p => p.id !== id) })),
+
+      addLiveProject: (project) => set((state) => ({ liveProjects: [...state.liveProjects, project] })),
+      updateLiveProject: (id, data) => set((state) => ({
+        liveProjects: state.liveProjects.map(p => p.id === id ? { ...p, ...data } : p)
+      })),
+      removeLiveProject: (id) => set((state) => ({ liveProjects: state.liveProjects.filter(p => p.id !== id) })),
 
       addExperience: (exp) => set((state) => ({ experience: [...state.experience, exp] })),
       updateExperience: (id, data) => set((state) => ({
@@ -177,6 +185,7 @@ export const useCMSStore = create<CMSState>()(
       removeCertification: (id) => set((state) => ({ certifications: state.certifications.filter(c => c.id !== id) })),
 
       setSectionOrder: (order) => set({ sectionOrder: order }),
+      setSectionFont: (sectionId, font) => set((state) => ({ sectionFonts: { ...state.sectionFonts, [sectionId]: font } })),
     }),
     {
       name: 'portfolio-cms-storage', // unique name

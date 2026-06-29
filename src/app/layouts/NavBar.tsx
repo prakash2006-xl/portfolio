@@ -1,20 +1,41 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Palette } from 'lucide-react'
 import { SettingsButton } from '../../modules/admin/overlay/SettingsButton'
 import { useThemeStore } from '../../store/theme.store'
+import { useCMSStore } from '../../store/cms.store'
+
+const DEFAULT_SECTION_ORDER = ['about', 'skills', 'projects', 'liveProjects', 'certifications', 'experience']
 
 export const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   
+  const { sectionOrder: rawSectionOrder, liveProjects } = useCMSStore()
+  
+  const sectionOrder = useMemo(() => {
+    const base = rawSectionOrder?.length ? rawSectionOrder : DEFAULT_SECTION_ORDER
+    const missing = DEFAULT_SECTION_ORDER.filter(s => !base.includes(s))
+    return missing.length > 0 ? [...base, ...missing] : base
+  }, [rawSectionOrder])
+  
+  const allPossibleLinks: Record<string, { name: string, href: string }> = {
+    about: { name: 'About', href: '#about' },
+    skills: { name: 'Skills', href: '#skills' },
+    projects: { name: 'Projects', href: '#projects' },
+    liveProjects: { name: 'Live Projects', href: '#liveProjects' },
+    certifications: { name: 'Certifications', href: '#certifications' },
+    experience: { name: 'Experience', href: '#experience' },
+  }
+
   const navLinks = [
     { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Education', href: '#education' },
+    ...sectionOrder
+      .filter(id => {
+        if (id === 'liveProjects' && liveProjects.length === 0) return false;
+        return allPossibleLinks[id] !== undefined;
+      })
+      .map(id => allPossibleLinks[id])
   ]
 
   useEffect(() => {

@@ -35,23 +35,26 @@ const updateCircularProjectSlides = (swiper: SwiperClass) => {
   })
 }
 
-export const Projects = () => {
-  const projects = useCMSStore((state) => state.projects)
-  const projectLoopItems = projects.length > 0
-    ? Array.from({ length: Math.max(1, Math.ceil(9 / projects.length)) }, () => projects).flat()
+export const LiveProjects = () => {
+  const liveProjects = useCMSStore((state) => state.liveProjects)
+  
+  if (!liveProjects || liveProjects.length === 0) return null
+
+  const projectLoopItems = liveProjects.length > 0
+    ? Array.from({ length: Math.max(1, Math.ceil(9 / liveProjects.length)) }, () => liveProjects).flat()
     : []
 
   return (
-    <section id="projects" className="relative w-full min-h-screen flex flex-col items-center justify-center py-24 z-10 overflow-hidden">
+    <section id="liveProjects" className="relative w-full min-h-screen flex flex-col items-center justify-center py-24 z-10 overflow-hidden">
       <div className="w-full">
         <motion.h2 
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
-          className="text-4xl md:text-6xl font-display font-bold mb-16 text-center text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]"
+          className="text-4xl md:text-6xl font-display font-bold mb-16 text-center text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-green-400 drop-shadow-[0_0_15px_rgba(45,212,191,0.2)]"
         >
-          Featured Work
+          Live Projects
         </motion.h2>
 
         <motion.div

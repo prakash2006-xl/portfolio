@@ -3,7 +3,7 @@ import { GlassCard } from '../../shared/ui/GlassCard'
 import { useCMSStore } from '../../store/cms.store'
 
 export const About = () => {
-  const { profile, certifications } = useCMSStore()
+  const { profile } = useCMSStore()
 
   return (
     <section id="about" className="relative w-full min-h-screen flex items-center justify-center py-24 px-6 z-10">
@@ -18,77 +18,38 @@ export const About = () => {
           About Me
         </motion.h2>
         
-        <GlassCard intensity="medium" className="p-6 md:p-12 mb-12">
+        <GlassCard intensity="medium" className="p-6 md:p-12 mb-12 flex flex-col md:flex-row items-center gap-8 md:gap-12">
+          {profile.profileImage && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1, duration: 0.8 }}
+              className="shrink-0 w-48 h-48 md:w-64 md:h-64 rounded-2xl overflow-hidden border-2 border-white/10 shadow-[0_0_30px_rgba(45,212,191,0.2)] bg-black/50"
+            >
+              <img 
+                src={profile.profileImage} 
+                alt={`${profile.firstName} Profile`}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).style.display = 'none';
+                }}
+              />
+            </motion.div>
+          )}
+
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 1 }}
+            className="flex-1"
           >
             <p className="text-lg md:text-2xl leading-relaxed text-gray-300">
               {profile.summary}
             </p>
           </motion.div>
         </GlassCard>
-
-        {certifications && certifications.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-          >
-            <h3 className="text-2xl md:text-4xl font-display font-bold mb-8 text-white">Certifications</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {certifications.map((cert, index) => (
-                <motion.div
-                  key={cert.id}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.5 }}
-                >
-                  <GlassCard intensity="low" className="p-6 h-full flex flex-col hover:border-primary/50 transition-colors group relative overflow-hidden">
-                    {cert.link && (
-                      <a href={cert.link} target="_blank" rel="noreferrer" className="absolute inset-0 z-20" aria-label={`View ${cert.name}`}></a>
-                    )}
-                    
-                    {cert.image && (
-                      <div className="w-full h-32 mb-4 rounded-lg overflow-hidden shrink-0 border border-white/5 bg-white/5">
-                        <img 
-                          src={cert.image} 
-                          alt={cert.name} 
-                          loading="lazy"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).style.display = 'none';
-                          }}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
-                        />
-                      </div>
-                    )}
-                    
-                    <div className="flex-1 flex flex-col">
-                      <h4 className="text-xl font-bold text-white mb-2 group-hover:text-primary transition-colors">{cert.name}</h4>
-                      <p className="text-primary text-sm font-medium">{cert.issuer}</p>
-                      
-                      <p className="text-sm text-gray-400 mt-4">{cert.date}</p>
-                      
-                      {cert.tags && cert.tags.length > 0 && (
-                        <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-white/10">
-                          {cert.tags.map(tag => (
-                            <span key={tag} className="text-xs px-2.5 py-1 bg-white/5 text-gray-300 rounded-full border border-white/10 relative z-30">
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </GlassCard>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        )}
       </div>
     </section>
   )

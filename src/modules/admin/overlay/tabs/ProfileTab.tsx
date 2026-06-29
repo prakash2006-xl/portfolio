@@ -16,6 +16,14 @@ export const ProfileTab = () => {
     <div className="space-y-6">
       <h3 className="text-xl font-bold text-white mb-4">Edit Profile</h3>
       
+      <div className="mb-6">
+        <ImageUploader 
+          label="Profile Photo (About Me)"
+          value={localProfile.profileImage || ''} 
+          onChange={(url) => setLocalProfile({...localProfile, profileImage: url})} 
+        />
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div>
           <label className="block text-sm font-medium text-gray-400 mb-1">First Name</label>

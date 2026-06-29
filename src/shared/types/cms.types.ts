@@ -11,6 +11,7 @@ export interface Profile {
   twitter?: string;
   resume?: string;
   summary: string;
+  profileImage?: string;
 }
 
 export interface Skill {
@@ -62,10 +63,12 @@ export interface CMSState {
   profile: Profile;
   skills: Skill[];
   projects: Project[];
+  liveProjects: Project[];
   experience: Experience[];
   education: Education[];
   certifications: Certification[];
   sectionOrder: string[];
+  sectionFonts: Record<string, string>;
   
   // Actions
   updateProfile: (data: Partial<Profile>) => void;
@@ -77,6 +80,10 @@ export interface CMSState {
   addProject: (project: Project) => void;
   updateProject: (id: string, project: Partial<Project>) => void;
   removeProject: (id: string) => void;
+
+  addLiveProject: (project: Project) => void;
+  updateLiveProject: (id: string, project: Partial<Project>) => void;
+  removeLiveProject: (id: string) => void;
 
   addExperience: (exp: Experience) => void;
   updateExperience: (id: string, exp: Partial<Experience>) => void;
@@ -91,4 +98,5 @@ export interface CMSState {
   removeCertification: (id: string) => void;
 
   setSectionOrder: (order: string[]) => void;
+  setSectionFont: (sectionId: string, font: string) => void;
 }
