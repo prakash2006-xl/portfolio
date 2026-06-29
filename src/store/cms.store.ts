@@ -11,14 +11,25 @@ const supabaseStorage: StateStorage = {
       .select('state')
       .eq('id', name)
       .single()
-    if (error || !data) return null
+    if (error) {
+      console.error("Supabase Load Error:", error)
+      return null
+    }
+    if (!data) return null
     return JSON.stringify(data.state)
   },
   setItem: async (name: string, value: string): Promise<void> => {
     const parsedState = JSON.parse(value)
-    await supabase
+    const { error } = await supabase
       .from('app_state')
       .upsert({ id: name, state: parsedState })
+    
+    if (error) {
+      console.error("Supabase Save Error:", error)
+      alert("Failed to save to database: " + error.message)
+    } else {
+      console.log("Successfully saved to Supabase!")
+    }
   },
   removeItem: async (name: string): Promise<void> => {
     await supabase
