@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Lock, Settings } from 'lucide-react'
+import { supabase } from '../../../services/supabase/client'
 import { ProfileTab } from './tabs/ProfileTab'
 import { ExperienceTab } from './tabs/ExperienceTab'
 import { ProjectsTab } from './tabs/ProjectsTab'
@@ -16,18 +17,28 @@ interface EditorOverlayProps {
 
 export const EditorOverlay = ({ onClose }: EditorOverlayProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
   const [activeTab, setActiveTab] = useState('profile')
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (password.trim() === '1234') {
+    setLoading(true)
+    setError('')
+    
+    const { data, error: authError } = await supabase.auth.signInWithPassword({
+      email,
+      password
+    })
+
+    if (authError) {
+      setError(authError.message)
+    } else if (data.user) {
       setIsAuthenticated(true)
-      setError('')
-    } else {
-      setError('Incorrect password')
     }
+    setLoading(false)
   }
 
   const overlayVariants = {
@@ -85,18 +96,27 @@ export const EditorOverlay = ({ onClose }: EditorOverlayProps) => {
                 <h3 className="text-2xl font-semibold text-white mb-2">Admin Access</h3>
                 <p className="text-gray-400 mb-8 text-sm">Please enter the passcode to access settings.</p>
                 <form onSubmit={handleLogin} className="space-y-5">
-                  <div>
+                  <div className="space-y-3">
+                    <input
+                      type="email"
+                      placeholder="Enter admin email..."
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-3 text-white outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-center tracking-widest text-lg"
+                      required
+                    />
                     <input
                       type="password"
                       placeholder="Enter password..."
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-3 text-white outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-center tracking-widest text-lg"
+                      required
                     />
                     {error && <p className="text-red-400 text-sm mt-2">{error}</p>}
                   </div>
-                  <button type="submit" className="w-full bg-gradient-to-r from-primary to-teal-400 text-black font-bold py-3 rounded-xl hover:opacity-90 transition-opacity shadow-lg shadow-primary/20">
-                    Unlock Settings
+                  <button type="submit" disabled={loading} className="w-full bg-gradient-to-r from-primary to-teal-400 text-black font-bold py-3 rounded-xl hover:opacity-90 transition-opacity shadow-lg shadow-primary/20 disabled:opacity-50">
+                    {loading ? 'Authenticating...' : 'Unlock Settings'}
                   </button>
                 </form>
               </div>
