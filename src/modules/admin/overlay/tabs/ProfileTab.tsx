@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Save } from 'lucide-react'
 import { useCMSStore } from '../../../../store/cms.store'
+import { ImageUploader } from '../../../../shared/ui/ImageUploader'
 
 export const ProfileTab = () => {
   const { profile, updateProfile } = useCMSStore()
@@ -127,13 +128,12 @@ export const ProfileTab = () => {
             className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-2 text-white outline-none focus:border-primary"
           />
         </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-400 mb-1">Resume URL</label>
-          <input 
-            type="text" 
-            value={localProfile.resume || ''}
-            onChange={(e) => setLocalProfile({...localProfile, resume: e.target.value})}
-            className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-2 text-white outline-none focus:border-primary"
+        <div className="mb-4">
+          <ImageUploader 
+            label="Resume Upload"
+            value={localProfile.resume || ''} 
+            onChange={(url) => setLocalProfile({...localProfile, resume: url})} 
+            accept="application/pdf,.doc,.docx"
           />
         </div>
       </div>

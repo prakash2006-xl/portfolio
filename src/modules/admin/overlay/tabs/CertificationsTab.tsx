@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Plus, Trash2, Edit2, Save, X } from 'lucide-react'
 import { useCMSStore } from '../../../../store/cms.store'
 import type { Certification } from '../../../../shared/types/cms.types'
+import { ImageUploader } from '../../../../shared/ui/ImageUploader'
 
 export const CertificationsTab = () => {
   const { certifications, addCertification, updateCertification, removeCertification } = useCMSStore()
@@ -87,14 +88,11 @@ export const CertificationsTab = () => {
           </div>
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-400 mb-1">Image URL (Optional)</label>
-          <input 
-            type="text" 
-            value={formData.image || ''}
-            onChange={(e) => setFormData({...formData, image: e.target.value})}
-            placeholder="https://..."
-            className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-2 text-white outline-none focus:border-primary"
+        <div className="mb-4">
+          <ImageUploader 
+            label="Certification Image (Optional)"
+            value={formData.image || ''} 
+            onChange={(url) => setFormData({...formData, image: url})} 
           />
         </div>
 

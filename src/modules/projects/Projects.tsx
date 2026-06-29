@@ -87,11 +87,11 @@ export const Projects = () => {
             className="project-swiper w-full max-w-7xl !pb-20 !pt-12 px-4"
           >
             {projectLoopItems.map((project, idx) => (
-              <SwiperSlide key={`${project.id}-${idx}`} className="!w-[280px] md:!w-[400px] lg:!w-[450px] will-change-transform flex">
+              <SwiperSlide key={`${project.id}-${idx}`} className="!w-[260px] md:!w-[400px] lg:!w-[450px] will-change-transform flex">
                 <div className="project-card-shell group h-full w-full relative flex">
                   <div className="project-ambient-glow absolute -inset-2 rounded-3xl blur-2xl opacity-[var(--project-card-glow)] transition-opacity duration-700"></div>
                   
-                  <GlassCard intensity="high" className="project-card flex-1 min-h-[550px] p-5 md:p-8 flex flex-col justify-between overflow-hidden relative rounded-2xl border border-white/10 bg-black/45 hover:bg-black/25">
+                  <GlassCard intensity="high" className="project-card flex-1 min-h-[420px] md:min-h-[550px] p-5 md:p-8 flex flex-col justify-between overflow-hidden relative rounded-2xl border border-white/10 bg-black/45 hover:bg-black/25">
                     
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(0,229,255,0.16),transparent_34%),radial-gradient(circle_at_90%_20%,rgba(16,185,129,0.13),transparent_30%),linear-gradient(135deg,rgba(255,255,255,0.07),transparent_45%)] opacity-80 transition-opacity duration-700 pointer-events-none group-hover:opacity-100" />
                     <div className="project-card-shine absolute inset-0 pointer-events-none" />
