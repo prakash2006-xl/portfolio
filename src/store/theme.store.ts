@@ -1,6 +1,5 @@
 import { create } from 'zustand'
-import { persist, createJSONStorage } from 'zustand/middleware'
-import { supabaseStorage } from './supabaseStorage'
+import { persist } from 'zustand/middleware'
 
 interface ThemeState {
   theme: 'dark' | 'light'
@@ -53,7 +52,6 @@ export const useThemeStore = create<ThemeState>()(
     }),
     {
       name: 'portfolio-theme-storage',
-      storage: createJSONStorage(() => supabaseStorage),
     }
   )
 )

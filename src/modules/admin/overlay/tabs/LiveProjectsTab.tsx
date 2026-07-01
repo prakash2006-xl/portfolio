@@ -31,7 +31,11 @@ export const LiveProjectsTab = () => {
 
   const handleSave = () => {
     if (editingId && formData) {
-      updateLiveProject(editingId, formData)
+      const cleanedData = {
+        ...formData,
+        points: formData.points?.filter(p => p.trim() !== '') || []
+      }
+      updateLiveProject(editingId, cleanedData)
       setEditingId(null)
     }
   }
@@ -122,7 +126,7 @@ export const LiveProjectsTab = () => {
           <label className="block text-sm font-medium text-gray-400 mb-1">Bullet Points (One per line)</label>
           <textarea 
             value={formData.points?.join('\n') || ''}
-            onChange={(e) => setFormData({...formData, points: e.target.value.split('\n').filter(p => p.trim() !== '')})}
+            onChange={(e) => setFormData({...formData, points: e.target.value.split('\n')})}
             rows={4}
             className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-2 text-white outline-none focus:border-primary"
           />
