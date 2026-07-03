@@ -19,7 +19,8 @@ const sectionComponents: Record<string, React.FC> = {
 
 import { useMemo } from 'react'
 
-const DEFAULT_SECTION_ORDER = ['about', 'skills', 'projects', 'liveProjects', 'certifications', 'experience']
+
+const DEFAULT_SECTION_ORDER = ['About', 'skills', 'projects', 'liveProjects', 'certifications', 'experience']
 const DEFAULT_SECTION_FONTS: Record<string, string> = {}
 
 function App() {
