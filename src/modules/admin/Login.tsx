@@ -4,8 +4,8 @@ import { GlassCard } from '../../shared/ui/GlassCard'
 import { useAuthStore } from '../../store/auth.store'
 
 export const Login = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('admin@gmail.com')
+  const [password, setPassword] = useState('12345678')
   const [loading, setLoading] = useState(false)
   const { setUser, setIsAdmin } = useAuthStore()
 

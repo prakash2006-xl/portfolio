@@ -19,8 +19,8 @@ interface EditorOverlayProps {
 
 export const EditorOverlay = ({ onClose }: EditorOverlayProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('admin@gmail.com')
+  const [password, setPassword] = useState('12345678')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [activeTab, setActiveTab] = useState('profile')
